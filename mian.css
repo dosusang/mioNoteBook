@@ -2,6 +2,10 @@
   box-sizing: border-box;
 }
 
+#main {
+  align-items: center;
+}
+
 body {
   text-align: center;
   font-size: 16px;
