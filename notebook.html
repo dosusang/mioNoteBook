@@ -1,19 +1,77 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8">
-        <meta viewport="width=device-width initial-scale=1.0">    </head>
-        <link rel="stylesheet" type="text/css" href="mian.css">
-        <title></title>
-    </head>
-    <body>
-        <h1>喵喵记事本</h1>
-        <input autofocus="autofocus" autocomplete="off" placeholder="请输入内容">
+
+<head>
+    <meta charset="UTF-8">
+    <meta viewport="width=device-width initial-scale=1.0">
+</head>
+<link rel="stylesheet" type="text/css" href="mian.css">
+<title></title>
+</head>
+
+<body>
+    <h1>喵喵记事本</h1>
+    <section id="main">
+        <input v-model="value" @keyup.enter="add" autofocus="autofocus" autocomplete="off" placeholder="请输入内容">
         <ol>
-            <li><p>文字字</p>  <button>x</button> </li>
-            <li><p>文字字</p>  <button>x</button> </li>
-            <li><p>文字字</p>  <button>x</button> </li>
-            <li><p>文字字</p>  <button>x</button> </li>
+            <li v-for="(val, index) in list">
+                <p>{{index+1+'.'}}&nbsp;</p>
+                <p>{{val}}</p> <button @click="remove(index)">x</button>
+            </li>
+            <li>
+                <p class="fs-s">{{'items:'+list.length}}&nbsp;</p>
+                <p @click="clear" class="fs-s" style="margin-right: 0.5em; margin-left: auto;">clear</p>
+            </li>
         </ol>
-    </body>
+    </section>
+
+    <section>
+
+    </section>
+</body>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    
+    var input = new Vue({
+        el: "#main",
+        data: {
+            value: "打豆豆",
+            list: ["吃饭饭","睡觉觉","打豆豆"]
+        },
+        methods: {
+            add: function () {
+                if (this.value != "") {
+                    this.list.push(this.value)
+                    this.value = ""
+                }
+                save()
+            },
+            remove: function (index) {
+                this.list.splice(index, 1)
+                save()
+            },
+            clear: function () {
+                this.list = []
+                save()
+            },
+        }
+    })
+
+    var save = function () {
+        if (window.localStorage) {
+            var storge = window.localStorage
+            localStorage.setItem("list", JSON.stringify(input.list))
+        } else {
+            alert("您的浏览器版本过低无法使用哦喵~")
+            this.value = "您的浏览器版本过低无法使用哦喵~"
+        }
+    }
+
+    if(window.localStorage.list != "undefined") {
+        input.list = JSON.parse(window.localStorage.list)
+    } else{
+        alert("初次使用请多指教哦喵~")
+    }
+</script>
+
 </html>

@@ -53,3 +53,11 @@ body ol li button:hover {
   display: inline;
   background-color: #ddd;
 }
+
+.dp-block {
+  display: inline !important;
+}
+
+.fs-s {
+  font-Size: 0.5em;
+}

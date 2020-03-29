@@ -32,7 +32,7 @@ background-color: #ddd;
         align-items: center;
         color: #888;
         border-bottom: 1px solid #ddd;
-        button {
+        button{
 
             background-color: #fff;
             border: none;
@@ -47,4 +47,10 @@ background-color: #ddd;
         }
     }
  }
+}
+.dp-block{
+    display: inline !important;
+}
+.fs-s{
+ font-Size: 0.5em   
 }
